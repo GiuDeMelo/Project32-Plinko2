@@ -3,6 +3,7 @@ var Engine = Matter.Engine,
     Events = Matter.Events,
     Bodies = Matter.Bodies;  
 
+var particle = [];
 var balls = [];
 var plinkos = [];
 var divisions =[];
@@ -101,17 +102,25 @@ function draw() {
     divisions[k].display();
    }
 
+  //particles
+   if(frameCount%60===0){
+    particle.push(new Particle(random(width/2-10,width/2+10),10,10));
+   }
+
+   for (var j = 0; j < particle.length; j++){
+    particle[j].display();
+  }
+
   //count>=5
    if(count>=5){
     gameState = END;
    }
-
 }
 
 ///////////////////////////////////////////
 function mousePressed(){
  if(gameState!==START){
   count++;
-  ball=new Ball(mouseX, 10, 10, 10);
+  ball=new Ball(mouseX, mouseY, 10, 10);
  }
 }
